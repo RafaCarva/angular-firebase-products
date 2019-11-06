@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 export class ProductsComponent implements OnInit {
 
   products$: Observable<Product[]>;
+  filterProducts$: Observable<Product[]>;
   displayedColumns = ['name', 'price', 'stock', 'operations'];
 
   @ViewChild('name', {static: false}) productName: ElementRef;
@@ -82,5 +83,11 @@ export class ProductsComponent implements OnInit {
       .catch(() => {
         this.snackBar.open('PrError on submiting the product.', 'OK', {duration: 2000});
       });
+  }
+
+
+  filter(event) {
+    // console.log(event.target.value);
+    this.filterProducts$ = this.productService.searchByName(event.target.value);
   }
 }

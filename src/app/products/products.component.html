@@ -63,15 +63,12 @@
 
         <div fxLayout="column" fxLayoutAlign="space-around stretch" style="padding: 20px; background: #f0f0f0">
           <mat-form-field fxFlex>
-              <input matInput placeholder="Search products" >
+              <input matInput placeholder="Search products" autocomplete="off" (keyup)="filter($event)">
           </mat-form-field>
         </div>
 
         <ul>
-          <li>Prod1</li>
-          <li>Prod2</li>
-          <li>Prod3</li>
-          <li>Prod4</li>
+          <li *ngFor="let p of filterProducts$ | async">{{p.name}}</li>
         </ul>
 
     </mat-tab>
